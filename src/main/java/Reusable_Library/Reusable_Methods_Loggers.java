@@ -219,6 +219,9 @@ public class Reusable_Methods_Loggers {
             getScreenShot(driver,logger,elementName);
         }
     }//end of click method
+
+
+
     //method to capture screenshot when logger fails
     public static void getScreenShot(WebDriver wDriver,ExtentTest logger,String imageName) {
         try {
