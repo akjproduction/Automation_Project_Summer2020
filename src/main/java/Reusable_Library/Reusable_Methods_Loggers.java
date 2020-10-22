@@ -139,7 +139,7 @@ public class Reusable_Methods_Loggers {
             logger.log(LogStatus.INFO, "Capturing text on element " + elementName);
             result = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator))).getText();
         } catch (Exception err) {
-            System.out.println("Unable to capture text on element " + err);
+            System.out.println("Unable to capture text on element " + err + elementName);
             logger.log(LogStatus.FAIL, "Unable to capture text on element " + err);
             getScreenShot(driver, logger, elementName);
         }//end of exception
@@ -166,7 +166,7 @@ public class Reusable_Methods_Loggers {
     }//end of drop down by text method
 
 
-    public static void typeAndSubmit(WebDriver driver, String locator, String userInput,ExtentTest logger, String elementName) {
+    public static void typeAndSubmit(WebDriver driver, String locator, String userInput, ExtentTest logger, String elementName) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         try {
             System.out.println("Entering a value on element " + elementName);

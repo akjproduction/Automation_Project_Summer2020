@@ -21,42 +21,38 @@ public class Abstract_Class_Cross_Browser_AI {
     @BeforeSuite
     public void setPrecondition() throws IOException, InterruptedException {
         //set the report path here
-        reports = new ExtentReports("src/main/java/HTML_Report/FedExReport.html",true);
+        reports = new ExtentReports("src/main/java/HTML_Report/FedExReport.html", true);
     }//end of before suite
 
     //to be able to pick up the name of your test classes dynamically we need to use beforemethod
     @Parameters("browser")
     @BeforeMethod
     public void captureTestName(String browser, Method methodName) throws IOException, InterruptedException {
-       System.out.println("Mohammed Forkan _ Action Item 8");
+        System.out.println("Mohammed Forkan _ Action Item 8");
         //set the driver here
-        if(browser.equalsIgnoreCase("chrome")) {
+        if (browser.equalsIgnoreCase("chrome")) {
             driver = Reusable_Methods_Loggers.getDriver();
-        } else if(browser.equalsIgnoreCase("firefox")){
-            System.setProperty("webdriver.gecko.driver","src/main/resources/geckodriver.exe");
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
             driver = new FirefoxDriver();
             driver.manage().window().maximize();
-        } else if(browser.equalsIgnoreCase("safari")){
+        } else if (browser.equalsIgnoreCase("safari")) {
             //define your safari driver here
         }
         logger = reports.startTest(methodName.getName() + "-" + browser.toUpperCase());
     }//end of before method
 
     @AfterMethod
-    public void endTest(){
+    public void endTest() {
 
         reports.endTest(logger);
     }//end of after method
 
     @AfterSuite
-    public void endSession(){
+    public void endSession() {
         reports.flush();
         driver.quit();
     }//end of afterSuite
-
-
-
-
 
 
 }
