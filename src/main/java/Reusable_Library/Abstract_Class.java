@@ -39,7 +39,7 @@ public class Abstract_Class {
     @AfterSuite
     public void endSession(){
         reports.flush();
-        driver.quit();
+        //driver.quit();
     }//end of afterSuite
 
 }//end of abstract class
