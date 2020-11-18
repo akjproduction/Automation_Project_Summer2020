@@ -53,17 +53,16 @@ public class Reusable_Methods_Loggers {
     }//end of click method
 
     //reusable method to click on any element on any websites
-    public static void clickPopup(WebDriver driver, String locator, ExtentTest logger, String elementName) {
+    public static void clickPopup(WebDriver driver, String locator, ExtentTest logger) {
         //define explicit wait
         WebDriverWait wait = new WebDriverWait(driver, 10);
         try {
-            System.out.println("Clicking on element " + elementName);
-            logger.log(LogStatus.INFO, "Clicking on element " + elementName);
+            System.out.println("Clicking on Popup ");
+            logger.log(LogStatus.INFO, "Clicking on Popup ");
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator))).click();
         } catch (Exception err) {
-            System.out.println("Unable to click on element " + err);
-            logger.log(LogStatus.INFO, "Unable to click on element " + elementName + err);
-            getScreenShot(driver, logger, elementName);
+            System.out.println("Unable to click on Popup ");
+            logger.log(LogStatus.INFO, "Popup doesn't exist, moving on ");
         }//end of exception
     }//end of click method
 
@@ -251,6 +250,24 @@ public class Reusable_Methods_Loggers {
             logger.log(LogStatus.FAIL, "", image);
         } catch (Exception e) {
             logger.log(LogStatus.FAIL, "Error Occured while taking SCREENSHOT!!!");
+            e.printStackTrace();
+        }
+    }//end of screenshot method
+
+
+    //method to capture screenshot when logger fails
+    public static void ScreenShot(WebDriver wDriver, ExtentTest logger, String imageName) {
+        try {
+            String fileName = imageName + ".png";
+
+            String directory = "src/main/java/HTML_Report/Screenshots/";
+            File sourceFile = ((TakesScreenshot) wDriver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(sourceFile, new File(directory + fileName));
+            //String imgPath = directory + fileName;
+            String image = logger.addScreenCapture("Screenshots/" + fileName);
+            logger.log(LogStatus.INFO, "", image);
+        } catch (Exception e) {
+            logger.log(LogStatus.INFO, "");
             e.printStackTrace();
         }
     }//end of screenshot method
